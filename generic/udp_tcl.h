@@ -7,7 +7,7 @@
  *
  * Written by Xiaotao Wu
  * 
- * $Id: udp_tcl.h,v 1.12 2014/02/13 20:49:57 huubeikens Exp $
+ * $Id: udp_tcl.h,v 1.13 2014/05/02 14:41:24 huubeikens Exp $
  *----------------------------------------------------------------------
  */
 
@@ -27,6 +27,14 @@
 #endif
 
 #ifdef WIN32
+#  if !defined( _WIN32_WINNT ) || ( _WIN32_WINNT < 0x0501 )
+#    undef  _WIN32_WINNT
+#    define _WIN32_WINNT 0x0501
+#  endif
+#  if !defined( WINVER ) || ( WINVER < 0x0501 )
+#    undef  WINVER
+#    define WINVER 0x0501
+#  endif
 #  include <winsock2.h>
 #  include <ws2tcpip.h>
 #else
